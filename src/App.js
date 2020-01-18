@@ -10,31 +10,84 @@ class App extends Component {
       { team: 'Aston Villa', points: 28}
     ]
   }
-
-  switchTeamHandler = () => {
+  
+  switchTeamHandler = (newTeam) => {
     this.setState({
       fixtures: [
-        { team: 'Trash', points: 45 },
+        { team: newTeam, points: 45 },
         { team: 'Manchester United', points: 36},
         { team: 'Aston Villa', points: 28}
       ]
-
+  
     })
   }
 
-  render() {
+  nameChangeHandler = (event) => {
+    this.setState({
+      fixtures: [
+        { team: 'Manchester City', points: 45 },
+        { team: 'Manchester United', points: 36},
+        { team: event.target.value, points: 28}
+      ]
+    })
+  }
+
+  render () {
+
+    const style = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer'
+    };
+
     return (
       <div className="App">
         <h1>Hi, I'm a React App</h1>
         <p>This is really working!</p>
-        <button onClick={this.switchTeamHandler}>Switch Fixture</button>
-        <Fixture team={this.state.fixtures[0].team} points={this.state.fixtures[0].points} >Trash team</Fixture>
-        <Fixture team={this.state.fixtures[1].team} points={this.state.fixtures[1].points} />
-        <Fixture team={this.state.fixtures[2].team} points={this.state.fixtures[2].points} />
+        <button 
+          style={style}
+          onClick={() => this.switchTeamHandler('Basura')}>Switch Fixture</button>
+        <Fixture
+          team={this.state.fixtures[0].team}
+          points={this.state.fixtures[0].points}
+          click={this.switchTeamHandler.bind(this, 'le trash')} >Trash team</Fixture>
+        <Fixture
+          team={this.state.fixtures[1].team}
+          points={this.state.fixtures[1].points} />
+        <Fixture
+          team={this.state.fixtures[2].team}
+          points={this.state.fixtures[2].points}
+          click={this.switchTeamHandler.bind(this, 'Trashy')}
+          changed={this.nameChangeHandler} />
       </div>
     );
-    // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'hello yay'));
   }
+  
+  // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'hello yay'));
 }
 
 export default App;
+
+// const [ fixturesState, setFixturesState ] = useState({
+//   fixtures: [
+//     { team: 'Manchester City', points: 45 },
+//     { team: 'Manchester United', points: 36},
+//     { team: 'Aston Villa', points: 28}
+//   ]
+// });
+
+// const [ otherState, setOtherState ] = useState('some other value');
+
+// console.log(fixturesState, otherState);
+
+// const switchTeamHandler = () => {
+// setFixturesState({
+//   fixtures: [
+//     { team: 'Trash', points: 45 },
+//     { team: 'Manchester United', points: 36},
+//     { team: 'Aston Villa', points: 28}
+//   ]
+// });
+// };

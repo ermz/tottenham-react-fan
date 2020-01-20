@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import Fixture from './Fixture/Fixture'
+import Fixture from './Fixture/Fixture';
+import UserOutput from './UserOutput/UserOutput';
+import UserInput from './UserInput/UserInput';
 
 class App extends Component {
   state = {
@@ -8,7 +10,8 @@ class App extends Component {
       { team: 'Manchester City', points: 45 },
       { team: 'Manchester United', points: 36},
       { team: 'Aston Villa', points: 28}
-    ]
+    ],
+    username: "ERMZ"
   }
   
   switchTeamHandler = (newTeam) => {
@@ -29,6 +32,12 @@ class App extends Component {
         { team: 'Manchester United', points: 36},
         { team: event.target.value, points: 28}
       ]
+    })
+  }
+
+  outputNameHandler = (event) => {
+    this.setState({
+      username: event.target.value
     })
   }
 
@@ -61,6 +70,16 @@ class App extends Component {
           points={this.state.fixtures[2].points}
           click={this.switchTeamHandler.bind(this, 'Trashy')}
           changed={this.nameChangeHandler} />
+
+        <UserOutput
+          username={this.state.username} />
+        <UserOutput 
+          username={this.state.username} />
+        <UserOutput 
+          username={this.state.username} />
+
+        <UserInput
+          newname={this.outputNameHandler}/>
       </div>
     );
   }
